@@ -2,8 +2,9 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# 设置DNS
-RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf
+# 设置DNS参数（而不是直接修改系统文件）
+# 在构建时可以通过--build-arg设置
+ARG DOCKER_DNS=8.8.8.8
 
 # 复制依赖文件并安装
 COPY requirements.txt .

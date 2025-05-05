@@ -2,7 +2,10 @@ version: '3'
 
 services:
   flask-app:
-    build: .
+    build:
+      context: .
+      args:
+        DOCKER_DNS: 8.8.8.8
     container_name: flask-mongodb-app
     restart: unless-stopped
     ports:
@@ -16,6 +19,9 @@ services:
       - seccomp=unconfined
     networks:
       - app-network
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
 
   mongodb:
     image: mongo:7.0
