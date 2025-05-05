@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask MongoDB待办事项应用</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .todo-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+        form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 10px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>待办事项列表</h1>
+    
+    <form action="/add" method="POST">
+        <input type="text" name="todo" placeholder="添加新任务" required>
+        <button type="submit">添加</button>
+    </form>
+    
+    <div id="todos">
+        {% for todo in todos %}
+        <div class="todo-item">
+            <span>{{ todo.task }}</span>
+            <a href="/delete/{{ todo._id }}">删除</a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html> 
